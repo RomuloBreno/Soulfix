@@ -1,0 +1,61 @@
+﻿@using Soulfix.Controllers;
+@model List<UserModel>
+
+@{
+    ViewData["Title"] = "Área de Usuários";
+
+}
+
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <h1>@ViewData["Title"]</h1>
+
+
+        <input type="text" class="" placeholder="Pesquisar" />
+
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Telefone</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{
+
+                    if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+
+
+                            <tr>
+                                <th scope="row">@item.Id</th>
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td>@item.Phone</td>
+                            </tr>
+
+
+                        }
+
+                    }
+                }
+
+            </tbody>
+        </table>
+
+        <a class="btn btn-primary" role="button">Adicionar Novo</a>
+        @{
+            IgnoreBody();
+        }
+    </main>
+</div>
+
+
+

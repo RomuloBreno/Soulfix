@@ -1,8 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Soulfix.Data;
+using Soulfix.Repository.Client;
+using Soulfix.Repository.User;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+string connectionString = builder.Configuration.GetConnectionString("database");
+builder.Services.AddDbContext<BaseContext>(x => x.UseSqlServer(connectionString));
+
+//Injetando dependencia da Interface resolvendo ela com uma classe
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +35,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Calendar}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

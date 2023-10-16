@@ -13,7 +13,7 @@ namespace Soulfix.Controllers
             _logger = logger;
         }
 
-        public IActionResult Calendar()
+        public IActionResult Index()
         {
             return View();
         }
