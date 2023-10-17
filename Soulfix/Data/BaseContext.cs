@@ -14,6 +14,7 @@ namespace Soulfix.Data
 
         public DbSet<ClientModel> Client { get; set; }
         public DbSet<UserModel> User { get; set; }
+        public DbSet<EventModel> Event { get; set; }
 
     }
 }
