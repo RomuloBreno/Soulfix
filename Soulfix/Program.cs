@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using Soulfix.Controllers;
 using Soulfix.Data;
 using Soulfix.Repository.Category;
 using Soulfix.Repository.Client;
@@ -39,6 +40,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Calendar}/{action=Index}/{id?}");
 
 app.Run();
