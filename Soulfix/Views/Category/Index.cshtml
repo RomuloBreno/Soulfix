@@ -1,10 +1,89 @@
-﻿@{
-    ViewData["Title"] = "Área de Categorias de Eventos";
-    Layout = "_Pages";
+﻿@using Soulfix.Controllers;
+@model List<CategoryModel>
+
+@{
+    ViewData["Title"] = "Categorias";
+
 }
 
-<div class="text-center">
-   
+<style>
+    .div-table > thead > tr>td,th {
+        padding:10px;
+    }
+    table{
+        margin:10px;
+        border-radius:10%;
+    }
+    .Category-view{
+        display:flex;
+        grid-auto-columns:fit-content();
+    }
+</style>
+
+<div class="container flex-column ">
+    <main role="main" class="pb-3">
+        <h1>@ViewData["Title"]</h1>
 
 
+        <input type="text" class="" placeholder="Pesquisar" />
+        <div class="Category-view">
+            
+
+                @{
+
+                    if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+        <br />
+                        <table class="div-table table-hover" style="background-color:@item.Color; color:white;">
+                            <thead class="">
+
+                               <tr>
+                            <th scope="col"># @item.Id</th>
+                               </tr>
+
+
+                                <tr>
+                                    <td scope="col">
+                                        
+                                    </td>
+                                </tr>
+                               <tr>
+                            <td scope="col">
+                                Nome: @item.Name
+                                    </td>
+                               </tr>
+                              
+
+                              
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                
+                            </tr>
+
+            </tbody>
+        </table>
+      
+
+
+                        }
+
+                    }
+                }
+        </div>
+
+        <br />
+
+        <a class="btn btn-primary" role="button">Adicionar Novo</a>
+        @{
+            IgnoreBody();
+        }
+    </main>
 </div>
+
+
+
+
