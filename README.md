@@ -1,6 +1,5 @@
 # Soulfix
-Aplicativo De agendamento de eventos e controle de Usuários/Clientes 
-
+Aplicativo de agendamento de eventos e controle de Usuários/Clientes 
 
 Desenvolvimento em APS.NET utilziando projeto para compreensão e estudo de conceitos como:
 
