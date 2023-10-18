@@ -7,5 +7,5 @@ namespace Soulfix.Repository.Category
 
         CategoryModel Create(CategoryModel category);
         List<CategoryModel> GetList();
-    }
+	}
 }

@@ -1,5 +1,6 @@
 ﻿using Soulfix.Data;
 using Soulfix.Models;
+using System.Linq;
 
 namespace Soulfix.Repository.Category
 {
@@ -27,3 +28,4 @@ namespace Soulfix.Repository.Category
         }
     }
 }
+

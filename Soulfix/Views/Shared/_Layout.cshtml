@@ -11,6 +11,28 @@
 
 </head>
 <body>
+<style>
+    .dropdown-menu-active{
+        display:block !important;
+    }
+
+    .perfil{
+            flex-grow: 0 !important;
+    }
+</style>
+<script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            document.querySelector("#dropdownMenuButton").addEventListener('click', function () {
+                document.querySelector(".dropdown-menu-entity").classList.toggle("dropdown-menu-active");
+            })
+
+            document.querySelector("#dropdownMenuPerfil").addEventListener('click', function () {
+                document.querySelector(".dropdown-menu-perfil").classList.toggle("dropdown-menu-active");
+            })
+        });
+
+
+</script>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -22,24 +44,73 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
+                          
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Serviços    
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-entity" aria-labelledby="dropdownMenuButton">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Index">Events</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Index">Clients</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                               
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="Index">Calendar</a>
+                        </li>
+                       
+                    </ul>
+
+
+                    <ul class="navbar-nav flex-grow-1 perfil">
+                        <li class="nav-item">
+
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Buy Beens</a>
+                           
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" role="button" id="dropdownMenuPerfil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Meu Perfil
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-perfil" aria-labelledby="dropdownMenuButton">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Config">Configs</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Perfil</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Admin</a>
+
+                            </div>
+                        </li>
+
+
+
                         <li class="nav-item">
                             @* <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="Index">Calendar</a> *@
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Event" asp-action="Index">Events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="Index">Clients</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+
                         </li>
                     </ul>
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
         </nav>
@@ -49,6 +120,7 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+           
             @RenderBody()
         </main>
     </div>
