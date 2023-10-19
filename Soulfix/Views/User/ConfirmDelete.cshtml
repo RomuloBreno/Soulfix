@@ -1,0 +1,25 @@
+﻿@using Soulfix.Controllers;
+@model UserModel
+
+@{
+    ViewData["Title"] = "Deletar Usuário";
+
+}
+
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <h1>@ViewData["Title"]</h1>
+
+        <h3>Deseja deletar o usuário @Model.Name</h3>
+        <form asp-controller="User" asp-action="DeleteUser" asp-route-id="@Model.Id">
+        <button href="" type="submit" class="btn btn-primary" role="button">Confirmar</button>
+        <a class="btn btn-primary" role="button" asp-controller="User" asp-action="Index">Cancelar</a>
+
+        </form>
+      
+    </main>
+</div>
+
+
+

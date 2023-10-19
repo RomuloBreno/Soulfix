@@ -51,21 +51,14 @@
 	<main role="main" class="pb-3">
 		<h1>@ViewData["Title"]</h1>
 
-
-
 		<div class="Category-view">
 
-
 			<br />
-
 
 			<div class="">
 				@{
 
 					DateTime dateCalendar = DateTime.Now;
-					Console.WriteLine(dateCalendar.Year);
-					Console.WriteLine(Model._monthChange);
-
 					DateTime dateStartMonth = new DateTime(dateCalendar.Year, Model._monthChange != 0 ? Model._monthChange : 1, 1);
 					int monthChecked = Model._monthChange;
 					int month = monthChecked;

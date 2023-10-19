@@ -21,7 +21,11 @@
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
                     <th scope="col">E-mail</th>
+                    <th scope="col">CPF</th>
                     <th scope="col">Telefone</th>
+                    <th scope="col">Job</th>
+                    <th scope="col"></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -38,8 +42,14 @@
                                 <th scope="row">@item.Id</th>
                                 <td>@item.Name</td>
                                 <td>@item.Email</td>
+                                <td>@item.CPF</td>
                                 <td>@item.Phone</td>
+                                <td>@item.Job</td>
+                                <td scope="col"><a role="button" class="btn btn-primary" asp-route-id="@item.Id" asp-controller="User" asp-action="GetForUpdate">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@item.Id" asp-controller="User" asp-action="ConfirmDelete">Apagar</a></td>
                             </tr>
+                               
+
 
 
                         }
@@ -50,7 +60,7 @@
             </tbody>
         </table>
 
-        <a class="btn btn-primary" role="button">Adicionar Novo</a>
+        <a class="btn btn-primary" role="button" asp-action="FormCreateUser">Adicionar Novo</a>
         @{
             IgnoreBody();
         }

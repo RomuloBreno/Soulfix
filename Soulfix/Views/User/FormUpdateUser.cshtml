@@ -1,0 +1,65 @@
+﻿@using Soulfix.Controllers;
+@using System.Globalization;
+@using Soulfix.Metods; 
+@model UserModel;
+
+@{
+	ViewData["Title"] = "Alteração de usuário";
+
+}
+<style>
+    .form-group{
+        padding:10px;
+    }
+</style>
+    <h1>@ViewData["Title"]</h1>
+<form asp-controller="User" asp-action="Update" asp-route-id="@Model" method="post">
+    <br />
+    <button type="submit" class="btn btn-primary" >Salvar</button>
+    <a type="button" class="btn btn-danger " asp-controller="User" asp-action="Index">Cancelar</a>
+    <br />  
+    <br />  
+    <div style=" display:none;">
+         
+    <input asp-for="Id" type="text"  id="exampleInputId" value="@Model.Id">
+    </div>
+    <div class="form-group w-100">
+        <label for="exampleInputName">Nome Completo</label>
+        <input asp-for="Name" type="text" class="form-control" id="exampleInputName" aria-describedby="" placeholder="Nome Completo">
+        
+    </div>
+   
+
+    <div class="form-row " style="display:flex">
+    <div class="form-group col-md-6">
+        <label for="exampleInputTelefone">Telefone</label>
+            <input asp-for="Phone" type="tel" class="form-control" id="exampleInputTelefone" aria-describedby="" placeholder="Telefone">
+    </div>
+ 
+    <div class="form-group col-md-6">
+        <label for="exampleInputEmail">E-mail</label>
+            <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
+     
+    </div>
+
+    </div>
+   
+    <div class="form-row " style="display:flex">
+        <div class="form-group col-6">
+            <label for="exampleInputCPF">CPF</label>
+            <input asp-for="CPF" type="text" class="form-control" id="exampleInputCpf" aria-describedby="" placeholder="CPF">
+
+        </div>
+       
+        <div class="form-group col-6">
+            <label for="exampleInputJob">Cargo</label>
+            <input type="text" asp-for="Job" class="form-control" id="exampleInputJob" aria-describedby="" placeholder="Cargo">
+
+        </div>
+
+    </div>
+
+   
+    </form>
+
+

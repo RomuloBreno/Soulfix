@@ -8,6 +8,11 @@ namespace Soulfix.Repository.User
 
         UserModel Create(UserModel User);
 
+        UserModel GetForUpdate(int id);
+        UserModel Update(UserModel User);
+
+        UserModel Delete(UserModel User);
+
         List<UserModel> GetList();
 
         //Crição de interface par apoder utilziar os métodos dentro de repository

@@ -26,7 +26,10 @@ namespace Soulfix.Controllers
 		}
 		public IActionResult Index(int monthChange)
 		{
-			List<EventModel> Event = _eventRepository.GetList();
+
+            monthChange = monthChange == 0 ? DateTime.Now.Month : monthChange;
+
+            List<EventModel> Event = _eventRepository.GetList();
 			EventCalendarCoupleModel eventCalendarCoupleModel = new EventCalendarCoupleModel()
 			{
 				Event = Event,

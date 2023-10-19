@@ -6,7 +6,7 @@ namespace Soulfix.Controllers
 {
     public class ClientController : Controller
     {
-        //OUTRA INJEÇÃOD E DEPENDENCIA PARA PODER USAR MÉTODOS DO REPOSITORIO
+        //OUTRA INJEÇÃO DE DEPENDENCIA PARA PODER USAR MÉTODOS DO REPOSITORIO
         private readonly IClientRepository _clientRepository;
         public ClientController(IClientRepository clientRepository)
         {
@@ -15,9 +15,10 @@ namespace Soulfix.Controllers
 
         public IActionResult Index()
         {
-           List<ClientModel> Client = _clientRepository.GetList();
+            List<ClientModel> Client = _clientRepository.GetList();
             return View(Client);
         }
+
 
         [HttpPost]
         public IActionResult Create(ClientModel Client)
