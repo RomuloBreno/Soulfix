@@ -8,6 +8,12 @@ namespace Soulfix.Repository.Client
 
         ClientModel Create(ClientModel Client);
 
+        ClientModel GetForUpdate(int id);
+
+        ClientModel Update(ClientModel client);
+
+        ClientModel Delete(ClientModel client);
+
         List<ClientModel> GetList();   
 
         //Crição de interface par apoder utilziar os métodos dentro de repository

@@ -1,0 +1,93 @@
+﻿@using Soulfix.Controllers;
+@using System.Globalization;
+@using Soulfix.Metods;
+@model EventModel;
+
+@{
+	ViewData["Title"] = "Novo Evento";
+
+}
+<style>
+	.form-group {
+		padding: 10px;
+	}
+
+	.field-validation-error {
+		color: #e01d1d;
+	}
+</style>
+<h1>@ViewData["Title"]</h1>
+
+<form asp-controller="Event" asp-action="Create" method="post">
+	<br />
+	<button type="submit" class="btn btn-primary">Salvar</button>
+	<a type="button" class="btn btn-danger " asp-controller="Event" asp-action="Index">Cancelar</a>
+	<br />
+	<br />
+
+	<div class="form-group w-100">
+		<label for="exampleInputName">Nome do Evento</label>
+		<input asp-for="Name" type="text" class="form-control" id="exampleInputName" aria-describedby="" placeholder="Nome do Evento">
+		@Html.ValidationMessageFor(x => x.Name)
+
+	</div>
+
+
+	<div class="form-row " style="display:flex">
+		<div class="form-group col-md-6">
+			<label for="exampleInputDescripition">Descrição</label>
+			<textarea type="text-area" asp-for="Description" class="form-control" id="exampleInputDescripition" aria-describedby="" placeholder="Descrição"></textarea>
+			@Html.ValidationMessageFor(x => x.Description)
+		</div>
+
+		<div class="form-group col-md-6">
+			<label for="exampleInputEmail">Data</label>
+			<input asp-for="Date" type="datetime-local" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Data do evento">
+			@Html.ValidationMessageFor(x => x.Date)
+
+		</div>
+
+	</div>
+
+
+	<div class="form-row " style="display:flex">
+		<div class="form-group col-6">
+			<label for="exampleInputCategory">Category</label>
+			<select asp-for="Category.Id" type="text" class="form-control" id="exampleInputCategory" aria-describedby="" placeholder="Categorias" list="optionCategory">
+			<option value="10000" selected>
+					Selecione uma opção...
+				</option>
+				@{
+					var t = (List<CategoryModel>)TempData["category"];
+					foreach (var item in t)
+					{
+
+						<option value="@item.Id">
+							<div style="display:flex ;">
+								<div style="background-color:@item.Color;" class="categoryFiedlView">
+								</div>
+								<div>
+									@item.Name
+								</div>
+							</div>
+						</option>
+
+					}
+					
+			@Html.ValidationMessageFor(x => x.Category)
+				}
+			</select>
+			<input asp-for="Id" style="display:none;" value="#exampleInputCategory">
+
+		</div>
+
+
+
+
+
+	</div>
+
+
+</form>
+
+

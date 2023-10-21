@@ -15,6 +15,6 @@ namespace Soulfix.Repository.User
 
         List<UserModel> GetList();
 
-        //Crição de interface par apoder utilziar os métodos dentro de repository
+        //Crição de interface para poder utilziar os métodos dentro de repository
     }
 }

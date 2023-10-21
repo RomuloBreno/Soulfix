@@ -1,8 +1,8 @@
 ﻿@using Soulfix.Controllers;
-@model UserModel
+@model EventModel
 
 @{
-    ViewData["Title"] = "Deletar Usuário";
+    ViewData["Title"] = "Deletar Evento";
 
 }
 
@@ -13,9 +13,9 @@
         <h1>@ViewData["Title"]</h1>
 
         <h3>Deseja deletar o usuário @Model.Name</h3>
-        <form asp-controller="User" asp-action="DeleteUser" asp-route-id="@Model.Id">
+        <form asp-controller="Event" asp-action="DeleteEvent" asp-route-id="@Model.Id">
         <button href="" type="submit" class="btn btn-primary" role="button">Confirmar</button>
-        <a class="btn btn-primary" role="button" asp-controller="User" asp-action="Index">Cancelar</a>
+        <a class="btn btn-primary" role="button" asp-action="Index">Cancelar</a>
 
         </form>
       

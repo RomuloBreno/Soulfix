@@ -3,14 +3,53 @@
 
 @{
     ViewData["Title"] = "Área de Eventos";
-   
+
 }
 
+<style>
+    .btn-close-status {
+        position: absolute;
+        right: 1%;
+        top: 30%;
+    }
 
 
+    .categoryFiedlView{
+        margin: 4%;
+        padding: 2px;
+        align-self: center;
+        display: flex;
+        opacity: 0.7;
+        width: 10px;
+        height: 10px;
+    
+    }
+
+    
+</style>
 <div class="container">
     <main role="main" class="pb-3">
         <h1>@ViewData["Title"]</h1>
+
+        @if (TempData["Status"] != null)
+        {
+
+            @if ((int)TempData["Status"] == 0)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["msg"]
+                    <div class="btn-close btn-close-status">x</div>
+                </div>
+            }
+            @if ((int)TempData["Status"] == 1)
+            {
+                <div class="alert alert-warning" role="alert">
+                    @TempData["msg"]
+                    <div class="btn-close btn-close-status">x</div>
+                </div>
+
+            }
+        }
 
 
         <input type="text" class="" placeholder="Pesquisar" />
@@ -21,8 +60,12 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Data</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Job</th>
+                    <th scope="col"></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -40,7 +83,25 @@
                                 <td>@item.Name</td>
                                 <td>@item.Description</td>
                                 <td>@item.Date</td>
+                                <td >
+                                    <div style="display:flex ;" >
+                                        <div style="background-color:@item.Category.Color;" class="categoryFiedlView">
+                                        </div>
+                                           <div>
+                                           @item.Category.Name 
+                                           </div> 
+                                </div>
+                                       
+
+                                </td>
+
+                                <td scope="col">
+                                    <a role="button" class="btn btn-primary" asp-route-id="@item.Id" asp-controller="Event" asp-action="GetForUpdate">Editar</a>
+                                    <a role="button" class="btn btn-danger" asp-route-id="@item.Id" asp-controller="Event" asp-action="ConfirmDelete">Apagar</a>
+                                </td>
                             </tr>
+
+
 
 
                         }
@@ -51,13 +112,12 @@
             </tbody>
         </table>
 
-        <a class="btn btn-primary" role="button">Adicionar Novo</a>
+        <a class="btn btn-primary" role="button" asp-action="Create">Adicionar Novo</a>
         @{
             IgnoreBody();
         }
     </main>
 </div>
-
 
 
 

@@ -6,10 +6,37 @@
 
 }
 
-
+<style>
+    .btn-close-status{
+        position: absolute;
+        right: 1%;
+        top: 30%;
+    }
+    }
+</style>
 <div class="container">
     <main role="main" class="pb-3">
         <h1>@ViewData["Title"]</h1>
+
+        @if (TempData["Status"] != null)
+        {
+            
+           @if ((int)TempData["Status"] == 0)
+            {
+            <div class="alert alert-success" role="alert">
+                @TempData["msg"]
+                    <div class="btn-close btn-close-status">x</div>
+            </div>     
+            }
+            @if ((int)TempData["Status"] == 1)
+            {
+                <div class="alert alert-warning" role="alert">
+                    @TempData["msg"]
+                    <div class="btn-close btn-close-status">x</div>
+                </div>
+
+            }
+        }
 
 
         <input type="text" class="" placeholder="Pesquisar" />
@@ -60,7 +87,7 @@
             </tbody>
         </table>
 
-        <a class="btn btn-primary" role="button" asp-action="FormCreateUser">Adicionar Novo</a>
+        <a class="btn btn-primary" role="button" asp-action="Create">Adicionar Novo</a>
         @{
             IgnoreBody();
         }

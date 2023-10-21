@@ -6,56 +6,96 @@
 
 }
 
+<style>
+    .btn-close-status {
+        position: absolute;
+        right: 1%;
+        top: 30%;
+    }
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            <h1>@ViewData["Title"]</h1>
+    }
+</style>
+<div class="container">
+    <main role="main" class="pb-3">
+        <h1>@ViewData["Title"]</h1>
+
+        @if (TempData["Status"] != null)
+        {
+
+            @if ((int)TempData["Status"] == 0)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["msg"]
+                    <div class="btn-close btn-close-status">x</div>
+                </div>
+            }
+            @if ((int)TempData["Status"] == 1)
+            {
+                <div class="alert alert-warning" role="alert">
+                    @TempData["msg"]
+                    <div class="btn-close btn-close-status">x</div>
+                </div>
+
+            }
+        }
 
 
-            <input type="text" class="" placeholder="Pesquisar" />
+        <input type="text" class="" placeholder="Pesquisar" />
 
 
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">E-mail</th>
-                        <th scope="col">Telefone</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">CNPJ</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Job</th>
+                    <th scope="col"></th>
 
-                    @{
+                </tr>
+            </thead>
+            <tbody>
 
-                        if (Model != null)
+                @{
+
+                    if (Model != null)
+                    {
+                        foreach (var item in Model)
                         {
-                            foreach (var item in Model)
-                            {
 
 
-                                <tr>
-                                    <th scope="row">@item.Id</th>
-                                    <td>@item.Name</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.Phone</td>
-                                </tr>
+                            <tr>
+                                <th scope="row">@item.Id</th>
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td>@item.CNPJ</td>
+                                <td>@item.Phone</td>
+                                
+                                <td scope="col">
+                                    <a role="button" class="btn btn-primary" asp-route-id="@item.Id" asp-controller="Client" asp-action="GetForUpdate">Editar</a>
+                                    <a role="button" class="btn btn-danger" asp-route-id="@item.Id" asp-controller="Client" asp-action="ConfirmDelete">Apagar</a>
+                                </td>
+                            </tr>
 
 
-                            }
+
 
                         }
+
                     }
+                }
 
-                </tbody>
-            </table>
+            </tbody>
+        </table>
 
-            <a class="btn btn-primary" role="button" asp-action="FormCreateClient">Adicionar Novo</a>
-            @{
-                IgnoreBody();
-            }
-        </main>
-    </div>
+        <a class="btn btn-primary" role="button" asp-action="Create">Adicionar Novo</a>
+        @{
+            IgnoreBody();
+        }
+    </main>
+</div>
 
 
 

@@ -32,5 +32,40 @@ namespace Soulfix.Repository.Event
 		{
             throw new NotImplementedException();
 		}
-	}
+
+
+
+
+        public EventModel Update(EventModel eventParam)
+        {
+
+            EventModel _event = GetForUpdate(eventParam.Id);
+
+            _event.Name = eventParam.Name;
+            _event.Description = eventParam.Description;
+            _event.Date = eventParam.Date;
+            _event.Category = eventParam.Category;
+           
+
+            _baseContext.Event.Update(_event);
+            _baseContext.SaveChanges();
+            return _event;
+        }
+
+        public EventModel GetForUpdate(int id)
+        {
+            return _baseContext.Event.FirstOrDefault(x => x.Id == id);
+
+        }
+
+        public EventModel Delete(EventModel eventParam)
+        {
+            _baseContext.Event.Remove(eventParam);
+            _baseContext.SaveChanges();
+            return eventParam;
+        }
+
+
+
+    }
 }

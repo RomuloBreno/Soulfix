@@ -1,0 +1,72 @@
+﻿@using Soulfix.Controllers;
+@using System.Globalization;
+@using Soulfix.Metods; 
+@model UserModel;
+
+@{
+	ViewData["Title"] = "Novo usuário";
+
+}
+<style>
+    .form-group{
+        padding:10px;
+    }
+    .field-validation-error{
+        color:#e01d1d;
+    }
+</style>
+    <h1>@ViewData["Title"]</h1>
+
+    <form asp-controller="User" asp-action="Create" method="post">
+    <br />
+    <button type="submit" class="btn btn-primary" >Salvar</button>
+    <a type="button" class="btn btn-danger " asp-controller="User" asp-action="Index">Cancelar</a>
+    <br />  
+    <br />  
+
+    <div class="form-group w-100">
+        <label for="exampleInputName">Nome Completo</label>
+        <input asp-for="Name" type="text" class="form-control" id="exampleInputName" aria-describedby="" placeholder="Nome Completo">
+        @Html.ValidationMessageFor(x => x.Name)
+        
+    </div>
+   
+
+    <div class="form-row " style="display:flex">
+    <div class="form-group col-md-6">
+        <label for="exampleInputTelefone">Telefone</label>
+            <input asp-for="Phone" class="form-control" id="exampleInputTelefone" aria-describedby="" placeholder="Telefone">
+            @Html.ValidationMessageFor(x => x.Phone)
+    </div>
+ 
+    <div class="form-group col-md-6">
+        <label for="exampleInputEmail">E-mail</label>
+            <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
+            @Html.ValidationMessageFor(x => x.Email)
+     
+    </div>
+
+    </div>
+   
+
+    <div class="form-row " style="display:flex">
+        <div class="form-group col-6">
+            <label for="exampleInputCPF">CPF</label>
+            <input asp-for="CPF" type="text" class="form-control" id="exampleInputCpf" aria-describedby="" placeholder="CPF">
+            @Html.ValidationMessageFor(x => x.CPF)
+
+        </div>
+       
+        <div class="form-group col-6">
+            <label for="exampleInputJob">Cargo</label>
+            <input asp-for="Job" type="text" class="form-control" id="exampleInputJob" aria-describedby="" placeholder="Cargo">
+            @Html.ValidationMessageFor(x => x.Job)
+
+        </div>
+
+    </div>
+
+   
+    </form>
+
+

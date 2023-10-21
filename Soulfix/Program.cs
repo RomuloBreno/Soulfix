@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.SqlServer;
-using Soulfix.Controllers;
+using Soulfix.Controllers.Message;
 using Soulfix.Data;
 using Soulfix.Repository.Category;
 using Soulfix.Repository.Client;
@@ -21,6 +21,7 @@ builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IMessage, Message>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,6 +41,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=User}/{action=Index}/{id?}");
+    pattern: "{controller=Event}/{action=Index}/{id?}");
 
 app.Run();
