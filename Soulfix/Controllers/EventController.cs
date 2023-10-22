@@ -33,12 +33,16 @@ namespace Soulfix.Controllers
         public IActionResult Create()
         {
             List<CategoryModel> category = _categoryRepository.GetList();
-            TempData["category"] = category;
-           
+
+            TempData["listCategoryName"] = category;
+
             return View();
         }
-        public IActionResult Update()
+
+
+		public IActionResult Update()
         {
+            
             return View();
         }
 
@@ -48,12 +52,13 @@ namespace Soulfix.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(EventModel EventModel)
+        public IActionResult Create(EventModel eventModel)
         {
+            //eventModel.Category.Id = eventModel._category;
             int statusMessage;
             if (ModelState.IsValid)
             {
-                _eventRepository.Create(EventModel);
+                _eventRepository.Create(eventModel);
                 statusMessage = 0; //succes
                 TempData["msg"] = _msg.CreateMessage("Evento", statusMessage);
                 TempData["Status"] = statusMessage;
@@ -63,22 +68,38 @@ namespace Soulfix.Controllers
             statusMessage = 1;
             TempData["msg"] = _msg.CreateMessage("Evento", statusMessage);
             TempData["Status"] = statusMessage;
-            return View("Create", EventModel);
+            return View("Create", eventModel);
         }
 
 
         [HttpGet]
         public IActionResult GetForUpdate(int id)
         {
-            EventModel Event = _eventRepository.GetForUpdate(id);
-            return View("Update", Event);
+			List<CategoryModel> category = _categoryRepository.GetList();
+
+			TempData["listCategoryName"] = category;
+			EventModel eventParam = _eventRepository.GetForUpdate(id);
+            return View("Update", eventParam);
         }
 
 
         [HttpPost]
         public IActionResult Update(EventModel Event)
         {
-            _eventRepository.Update(Event);
+			int statusMessage;
+			if (ModelState.IsValid)
+			{
+				_eventRepository.Update(Event);
+				statusMessage = 3; //succes
+				TempData["msg"] = _msg.CreateMessage("Evento", statusMessage);
+				TempData["Status"] = statusMessage;
+				return RedirectToAction("index");
+
+			}
+			statusMessage = 4;
+			TempData["msg"] = _msg.CreateMessage("Evento", statusMessage);
+			TempData["Status"] = statusMessage;
+				
             return RedirectToAction("index");
         }
 

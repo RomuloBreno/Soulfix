@@ -1,6 +1,7 @@
 ﻿@using Soulfix.Controllers;
 @using System.Globalization;
 @using Soulfix.Metods;
+@using System.Collections;
 @model EventModel;
 
 @{
@@ -52,32 +53,19 @@
 
 	<div class="form-row " style="display:flex">
 		<div class="form-group col-6">
-			<label for="exampleInputCategory">Category</label>
-			<select asp-for="Category.Id" type="text" class="form-control" id="exampleInputCategory" aria-describedby="" placeholder="Categorias" list="optionCategory">
+			<label for="exampleInputCategory">Categorias</label>
+			@{
+				var teste = TempData["listCategoryName"];
+			}
+			<select asp-for="CategoryId" type="text" class="form-control" id="exampleInputCategory" aria-describedby="" placeholder="Categorias" asp-items='new SelectList((IEnumerable)teste, "Id", "Name")'>
 			<option value="10000" selected>
 					Selecione uma opção...
 				</option>
-				@{
-					var t = (List<CategoryModel>)TempData["category"];
-					foreach (var item in t)
-					{
-
-						<option value="@item.Id">
-							<div style="display:flex ;">
-								<div style="background-color:@item.Color;" class="categoryFiedlView">
-								</div>
-								<div>
-									@item.Name
-								</div>
-							</div>
-						</option>
-
-					}
-					
+			
+				
 			@Html.ValidationMessageFor(x => x.Category)
-				}
 			</select>
-			<input asp-for="Id" style="display:none;" value="#exampleInputCategory">
+			
 
 		</div>
 

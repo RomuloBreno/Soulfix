@@ -19,7 +19,7 @@ namespace Soulfix.Repository.Event
 
         public List<EventModel> GetList()
         {
-            return _baseContext.Event.Include(e => e.Category).ToList();
+            return _baseContext.Event.Include(x => x.Category).ToList();
 		}
         public EventModel Create(EventModel eventParam)
         {
@@ -27,11 +27,6 @@ namespace Soulfix.Repository.Event
             _baseContext.SaveChanges(); 
             return eventParam;
         }
-
-		public List<EventModel> GetCategory(int id)
-		{
-            throw new NotImplementedException();
-		}
 
 
 
@@ -44,7 +39,7 @@ namespace Soulfix.Repository.Event
             _event.Name = eventParam.Name;
             _event.Description = eventParam.Description;
             _event.Date = eventParam.Date;
-            _event.Category = eventParam.Category;
+            _event.CategoryId = eventParam.CategoryId;
            
 
             _baseContext.Event.Update(_event);

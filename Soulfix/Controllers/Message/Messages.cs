@@ -21,8 +21,10 @@
         private readonly string[] msg =
         {
           "Sucesso na criação" ,
-          "Falha na criiação",
-          "Valide os dados e tente novamente"
+          "Falha na criação",
+          "Valide os dados e tente novamente",
+          "Sucesso ao editar",
+          "Falha ao editar"
         };
 
     }

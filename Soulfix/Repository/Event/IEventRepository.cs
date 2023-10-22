@@ -17,8 +17,6 @@ namespace Soulfix.Repository.Event
         EventModel Delete(EventModel eventParam);
 
 
-        List<EventModel> GetCategory(int id);
-
 		//Crição de interface par apoder utilziar os métodos dentro de repository
 	}
 }

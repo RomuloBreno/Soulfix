@@ -1,65 +1,78 @@
 ﻿@using Soulfix.Controllers;
 @using System.Globalization;
-@using Soulfix.Metods; 
-@model ClientModel;
+@using Soulfix.Metods;
+@using System.Collections;
+@model EventModel;
 
 @{
-	ViewData["Title"] = "Alteração de Cliente";
+	ViewData["Title"] = "Atualizar Evento";
 
 }
 <style>
-    .form-group{
-        padding:10px;
-    }
+	.form-group {
+		padding: 10px;
+	}
+
+	.field-validation-error {
+		color: #e01d1d;
+	}
 </style>
-    <h1>@ViewData["Title"]</h1>
-<form asp-controller="Client" asp-action="Update" asp-route-id="@Model.Id" method="post">
-    <br />
-    <button type="submit" class="btn btn-primary" >Salvar</button>
-    <a type="button" class="btn btn-danger " asp-controller="Client" asp-action="Index">Cancelar</a>
-    <br />  
-    <br />  
-    <div style=" display:none;">
-         
-   
-    </div>
-    <div class="form-group w-100">
-        <label for="exampleInputName">Nome Completo</label>
-        <input asp-for="Name" type="text" class="form-control" id="exampleInputName" aria-describedby="" placeholder="Nome Completo">
-        
-    </div>
-   
+<h1>@ViewData["Title"]</h1>
 
-    <div class="form-row " style="display:flex">
-    <div class="form-group col-md-6">
-        <label for="exampleInputTelefone">Telefone</label>
-            <input asp-for="Phone" type="tel" class="form-control" id="exampleInputTelefone" aria-describedby="" placeholder="Telefone">
-    </div>
- 
-    <div class="form-group col-md-6">
-        <label for="exampleInputEmail">E-mail</label>
-            <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
-     
-    </div>
+<form asp-controller="Event" asp-action="Update" asp-route-id="@Model.Id" method="post">
+	<br />
+	<button type="submit" class="btn btn-primary">Salvar</button>
+	<a type="button" class="btn btn-danger " asp-controller="Event" asp-action="Index">Cancelar</a>
+	<br />
+	<br />
 
-    </div>
-   
-    <div class="form-row " style="display:flex">
-        <div class="form-group col-6">
-            <label for="exampleInputCPF">CPF</label>
-            <input asp-for="CPF" type="text" class="form-control" id="exampleInputCpf" aria-describedby="" placeholder="CPF">
+	<div class="form-group w-100">
+		<label for="exampleInputName">Nome do Evento</label>
+		<input asp-for="Name" type="text" class="form-control" id="exampleInputName" aria-describedby="" placeholder="Nome do Evento">
+		
 
-        </div>
-       
-        <div class="form-group col-6">
-            <label for="exampleInputJob">CNPJ</label>
-            <input type="text" asp-for="CNPJ" class="form-control" id="exampleInputJob" aria-describedby="" placeholder="CNPJ">
+	</div>
 
-        </div>
 
-    </div>
+	<div class="form-row " style="display:flex">
+		<div class="form-group col-md-6">
+			<label for="exampleInputDescripition">Descrição</label>
+			<textarea type="text-area" asp-for="Description" class="form-control" id="exampleInputDescripition" aria-describedby="" placeholder="Descrição"></textarea>
+			
+		</div>
 
-   
-    </form>
+		<div class="form-group col-md-6">
+			<label for="exampleInputEmail">Data</label>
+			<input asp-for="Date" type="datetime-local" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Data do evento">
+			
+
+		</div>
+
+	</div>
+
+
+	<div class="form-row " style="display:flex">
+		<div class="form-group col-6">
+			<label for="exampleInputCategory">Categorias</label>
+			@{
+				var teste = (IEnumerable)TempData["listCategoryName"];
+			}
+			<select asp-for="CategoryId" class="form-control" id="exampleInputCategory"  asp-items='new SelectList(teste,"Id", "Name",Model.CategoryId)'>
+				@* <option value="10000" selected>
+					Selecione uma opção...
+				</option> *@
+			</select>
+
+
+		</div>
+
+
+
+
+
+	</div>
+
+
+</form>
 
 
