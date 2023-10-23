@@ -1,0 +1,26 @@
+﻿@using Soulfix.Controllers;
+@model LoginModel
+@{
+
+    Layout = "~/Views/Shared/_LayoutOutSession.cshtml";
+}
+<form asp-controller="Login" asp-action="Start" method="post">
+    <div class="form-group ">
+       
+        <input asp-for="Login" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
+        @Html.ValidationMessageFor(x => x.Login)
+       <br />
+    </div>
+    <div class="form-group">
+        
+        <input asp-for="Pswrd" type="text" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+        @Html.ValidationMessageFor(x => x.Pswrd)
+    </div>
+
+
+    <br />
+    <div class="text-center">
+
+    <button type="submit" class="btn btn-primary">Entrar</button>
+    </div>
+</form>

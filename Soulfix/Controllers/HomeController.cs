@@ -1,21 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Soulfix.Controllers.Message;
 using Soulfix.Models;
+using Soulfix.Repository.Login;
 using System.Diagnostics;
 
 namespace Soulfix.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ILoginRepository _loginRepository;
+        private IMessage _msg;
+        public HomeController(ILoginRepository loginRepository, IMessage message)
         {
-            _logger = logger;
+            _loginRepository = loginRepository;
+            _msg = message;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(LoginModel credential)
         {
             return View();
+             //return ReturnViewMethod(credential);
+        }
+        private IActionResult ReturnViewMethod(LoginModel credentials)
+        {
+            int type = _loginRepository.CheckType(credentials);
+            string controllerType = credentials.ValidType(type);
+            TempData["layouTypeLogin"] = controllerType;
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Privacy()

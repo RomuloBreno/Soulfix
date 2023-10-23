@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Soulfix.Controllers;
 using Soulfix.Models;
 
 namespace Soulfix.Data
@@ -16,6 +17,6 @@ namespace Soulfix.Data
         public DbSet<UserModel> User { get; set; }
         public DbSet<EventModel> Event { get; set; }
         public DbSet<CategoryModel> Category { get; set; }
-
-    }
+		public DbSet<LoginModel> Login { get; internal set; }
+	}
 }
