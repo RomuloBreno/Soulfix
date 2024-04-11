@@ -1,0 +1,212 @@
+﻿@using Soulfix.Controllers;
+@using System.Globalization;
+@using Soulfix.Metods;
+@model EventCalendarCoupleModel;
+
+@{
+	ViewData["Title"] = "Agendamentos";
+
+}
+
+<style>
+	.div-table > thead > tr > th {
+		padding: 10px;
+	}
+
+	table {
+	}
+
+	.Category-view {
+		display: flex;
+		grid-auto-columns: fit-content();
+	}
+
+	.days {
+		margin: 10px;
+		padding: 10px;
+		margin: 10px;
+		min-height: 130px;
+		min-width: 150px;
+		border: 1px solid black;
+		display: flex;
+	}
+
+	.thead {
+		display: grid;
+		grid-template-columns: repeat(7, 1fr);
+		grid-template-rows: repeat(5,1fr);
+	}
+
+	.month {
+		display: grid;
+		grid-template-rows: repeat(1,1fr);
+	}
+
+	a {
+		text-decoration: none;
+	}
+</style>
+
+<div class="container text-center flex-column ">
+	<main role="main" class="pb-3">
+		<h1>@ViewData["Title"]</h1>
+
+
+		<form id="form1" runat="server">
+
+			<asp:Calendar id="calendar1" runat="server">
+
+				<OtherMonthDayStyle ForeColor="LightGray">
+				</OtherMonthDayStyle>
+
+				<TitleStyle BackColor="Blue"
+							ForeColor="White">
+				</TitleStyle>
+
+				<DayStyle BackColor="gray">
+				</DayStyle>
+
+				<SelectedDayStyle BackColor="LightGray"
+								  Font-Bold="True">
+				</SelectedDayStyle>
+
+			</asp:Calendar>
+
+		</form>
+
+
+		<div class="Category-view">
+
+			<br />
+
+			<div class="">
+				@{
+
+					DateTime dateCalendar = DateTime.Now;
+					DateTime dateStartMonth = new DateTime(dateCalendar.Year, Model._monthChange != 0 ? Model._monthChange : 1, 1);
+					int monthChecked = Model._monthChange;
+					int month = monthChecked;
+					for (month = 1; month <= 12; month++)
+					{
+						if (monthChecked == month)
+						{
+							<h2>
+								<a class="btn btn-danger" role="button" onclick="location.href='@Url.Action("Index", "Calendar")'">
+
+									@DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(month)
+								</a>
+							</h2>
+
+						}
+						else
+						{
+
+							var link = Url.Action("Index", "Calendar", new { monthChange = month});
+							<h2>
+								<a class="btn" role="button" href='@link'>
+
+									@DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(month)
+								</a>
+							</h2>
+						}
+
+					}
+
+				}
+			</div>
+
+
+
+
+			<div class="thead">
+
+				@{
+
+					var DateWithDayEnd = dateStartMonth.AddMonths(1).AddDays(-1);
+					int day;
+
+					for (day = 1; day <= DateWithDayEnd.Day; day++)
+					{
+						DateTime dateCreate = new DateTime(DateWithDayEnd.Year, DateWithDayEnd.Month, day);
+
+
+
+
+
+						//criaçao dos dias no canlendario
+						string dayName = "";
+						if (day <= 7)
+						{
+
+							dayName = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(dateCreate.DayOfWeek);
+						}
+
+						if (day == 1 && dateCreate.DayOfWeek != DayOfWeek.Sunday)
+
+						{
+							int dayOff = 7 - ((int)dateCreate.DayOfWeek);
+							for (int i = 7; i > dayOff; i--)
+							{
+
+								<div class="days flex-column">
+
+									<div></div>
+									<div></div>
+
+								</div>
+
+							}
+						}
+						//Criar Eventos dentro dos dias
+						<div class="days flex-column">
+
+							<div>@dayName</div>
+							<div>@day</div>
+							@foreach (var item in Model.Event)
+							{
+
+								if (Convert.ToDateTime(item.Date).Day == dateCreate.Day && Convert.ToDateTime(item.Date).Month == dateCreate.Month && Convert.ToDateTime(item.Date).Year == dateCreate.Year)
+								{
+
+									if (item.Category != null)
+									{
+
+										CategoryModel category = item.Category;
+
+										<div class="eventsDay" style="border-radius:4px;background-color:@category.Color;color:White" scope="col">
+											@item.Name
+										</div>
+									}
+									else
+									{
+										<div class="eventsDay" style="" scope="col">
+											@item.Name
+										</div>
+									}
+								}
+
+							}
+
+						</div>
+					}
+
+
+
+
+
+				}
+
+			</div>
+
+
+		</div>
+
+		<br />
+
+
+	</main>
+</div>
+
+
+
+

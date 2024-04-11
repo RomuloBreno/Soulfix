@@ -36,25 +36,23 @@
                         foreach (var item in Model)
                         {
         <br />
-                        <table class="div-table table-hover" style="background-color:@item.Color; color:white;">
+
+                        
+
+                        <table class="div-table table-hover">
                             <thead class="">
 
                                <tr>
                             <th scope="col"># @item.Id</th>
-                               </tr>
-
-
-                                <tr>
-                                    <td scope="col">
-                                        
-                                    </td>
-                                </tr>
-                               <tr>
-                            <td scope="col">
+                            <th scope="col"> 
+                            
+                                        <div style="background-color:@item.Color; color:white; width:50px; height:50px; border-radius:100px" class="border"></div>
+                            
+                            </th>
+                            <th scope="col">
                                 Nome: @item.Name
-                                    </td>
-                               </tr>
-                              
+                            </th>
+                               </tr>                             
 
                               
                             </thead>
