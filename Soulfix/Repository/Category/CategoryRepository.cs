@@ -21,6 +21,25 @@ namespace Soulfix.Repository.Category
             _baseContext.SaveChanges();
             return category;
         }
+        public CategoryModel GetForUpdate(int id)
+        {
+            return _baseContext.Category.FirstOrDefault(x => x.Id == id);
+
+        }
+        public CategoryModel Update(CategoryModel categoryParam)
+        {
+
+            CategoryModel _category = GetForUpdate(categoryParam.Id);
+
+            _category.Name = categoryParam.Name;
+            _category.Color = categoryParam.Color;
+            _category.IdOwner = categoryParam.IdOwner;
+
+
+            _baseContext.Category.Update(_category);
+            _baseContext.SaveChanges();
+            return _category;
+        }
 
         public List<CategoryModel> GetList()
         {
