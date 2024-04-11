@@ -14,8 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-string connectionString = builder.Configuration.GetConnectionString("database");
-builder.Services.AddDbContext<BaseContext>(x => x.UseSqlServer(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("conexaoMySQL");
+builder.Services.AddDbContext<BaseContext>(x => x.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 //Injetando dependencia da Interface resolvendo ela com uma classe
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
