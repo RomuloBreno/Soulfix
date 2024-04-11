@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using Pomelo.EntityFrameworkCore.MySql;
 using Soulfix.Controllers.Message;
 using Soulfix.Data;
 using Soulfix.Repository.Category;
@@ -14,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var connectionString = builder.Configuration.GetConnectionString("conexaoMySQL");
+var connectionString = builder.Configuration.GetConnectionString("database");
 builder.Services.AddDbContext<BaseContext>(x => x.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 //Injetando dependencia da Interface resolvendo ela com uma classe
