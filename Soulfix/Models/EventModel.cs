@@ -10,7 +10,7 @@
 
 		public DateTime? Date { get; set; }
         public int? UserOwner { get; set; }
-        public string? IdClientes { get; set; }
+        public string? IdClients { get; set; }
         public int Beens { get; set; }
         public CategoryModel? Category { get; set; }
 
