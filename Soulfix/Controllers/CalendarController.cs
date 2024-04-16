@@ -17,6 +17,8 @@ namespace Soulfix.Controllers
 
 		public  int _monthChange;
 
+		public DateTime _dayInitialChange;
+
 
 		public CalendarController(IEventRepository eventRepository, ICategoryRepository categoryRepository)
 		{
@@ -27,9 +29,9 @@ namespace Soulfix.Controllers
 		public IActionResult Index(int monthChange)
 		{
 
-            monthChange = monthChange == 0 ? DateTime.Now.Month : monthChange;
+			monthChange = monthChange == 0 ? DateTime.Now.Month : monthChange;
 
-            List<EventModel> Event = _eventRepository.GetList();
+			List<EventModel> Event = _eventRepository.GetList();
 			EventCalendarCoupleModel eventCalendarCoupleModel = new EventCalendarCoupleModel()
 			{
 				Event = Event,
@@ -38,10 +40,29 @@ namespace Soulfix.Controllers
 
 			return View(eventCalendarCoupleModel);
 		}
+		public IActionResult Week(int monthChange, DateTime dayInitialChange)
+		{
+			monthChange = monthChange == 0 ? DateTime.Now.Month : monthChange;
+
+			List<EventModel> Event = _eventRepository.GetList();
+			EventCalendarCoupleModel eventCalendarCoupleModel = new EventCalendarCoupleModel()
+			{
+				Event = Event,
+				_monthChange = Month(monthChange),
+				_dayInitialChange =	DayInitial(dayInitialChange)
+			};
+
+			return View(eventCalendarCoupleModel);
+		}
 
 		public int Month(int monthChange)
 		{
 			return _monthChange = monthChange;
+		}
+
+		public DateTime DayInitial(DateTime dayInitialChange)
+		{
+			return _dayInitialChange = dayInitialChange;
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

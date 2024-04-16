@@ -1,0 +1,233 @@
+﻿@using Soulfix.Controllers;
+@using System.Globalization;
+@using Soulfix.Metods;
+@model EventCalendarCoupleModel;
+
+@{
+	ViewData["Title"] = "Agendamentos";
+
+}
+
+<style>
+	.div-table > thead > tr > th {
+		padding: 10px;
+	}
+
+	table {
+	}
+
+	.Category-view {
+		display: flex;
+		grid-auto-columns: fit-content();
+	}
+
+	.days {
+		margin: 10px;
+		padding: 10px;
+		margin: 10px;
+		min-height: 130px;
+		min-width: 150px;
+		border: 1px solid black;
+		display: flex;
+	}
+
+	.thead {
+		display: grid;
+		grid-template-columns: repeat(7, 1fr);
+		grid-template-rows: repeat(5,1fr);
+	}
+
+	.month {
+		display: grid;
+		grid-template-rows: repeat(1,1fr);
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+
+</style>
+<script>
+	console.log(document.querySelectorAll(".tagSemana"))
+
+
+</script>
+
+<div class="container text-center flex-column ">
+	<main role="main" class="pb-3">
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+				<a class="nav-link" asp-action="Index">Mês</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" asp-action="Week">Semana</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" asp-action="">Dia</a>
+			</li>
+
+
+			
+		</ul>
+		<br>
+		<h1>@ViewData["Title"]</h1>
+
+		<div class="">
+
+			<br />
+
+			<div class="d-flex">
+				@{
+					//Data model
+					
+					DateTime dateCalendar = DateTime.Now;
+					DateTime date = new DateTime(dateCalendar.Year, Model._monthChange, Model._dayInitialChange.Day);
+					DateTime dayInitialChange = Model._dayInitialChange;
+					DateTime dateWeekEnd = dayInitialChange.AddDays(6);
+
+
+					int monthChecked = Model._monthChange;
+
+
+					DateTime dayInitialNextWeek = date.AddDays(7);
+					DateTime dayInitialBackWeek = date.AddDays(-7);
+
+
+					int month = monthChecked;
+					for (month = 1; month <= 12; month++)
+					{
+						if (monthChecked == month)
+						{
+							<h2 >
+								<a class="btn btn-danger" role="button" asp-route="@month" onclick="location.href='@Url.Action("Week", "Calendar")'">
+
+									@DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(month)
+								</a>
+							</h2>
+
+						}
+						else
+						{
+
+							var link = Url.Action("Week", "Calendar", new { monthChange = month});
+							<h2>
+								<a class="btn" role="button" href='@link'>
+
+									@DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(month)
+								</a>
+							</h2>
+						}
+						
+					}
+
+					<ul class="nav nav-tabs">
+						<li class="nav-item">
+							@{
+								var link1 = Url.Action("Week", "Calendar", new { dayInitialChange = dayInitialBackWeek });
+								var link2 = Url.Action("Week", "Calendar", new { dayInitialChange = dayInitialNextWeek });
+								if (dayInitialBackWeek.Month < month)
+								{
+									link1 = Url.Action("Week", "Calendar", new { dayInitialChange = dayInitialBackWeek, monthChange = dayInitialBackWeek.Month });
+								}
+
+								if (dayInitialBackWeek.Month > month)
+								{
+									link2 = Url.Action("Week", "Calendar", new { dayInitialChange = dayInitialNextWeek, monthChange = dayInitialBackWeek.Month });
+								}
+							}
+							<a class="btn" role="button" href="@link1">
+								<p>
+									Semana Anterior
+								</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="btn" role="button" href="@link2">
+								<p>
+									Semana Seguinte
+								</p>
+							</a>
+						</li>
+
+					</ul>
+					}
+			</div> <br/>
+			<div class="d-flex">
+			
+
+
+
+			<div class="Card">
+			<span class="headcol">Horas</span>
+				@{
+					for (var hour = 1; hour <= 24; hour++)
+					{
+
+
+						<div class="">
+							<div class="headcol p-2">@hour:00</div>
+							</div>
+
+						}
+					}
+				</div>
+
+				@{
+					// var DateWithDayEnd = dateStartMonth.AddMonths(1).AddDays(-1);
+					int countDays = 0;
+					
+					int day;
+
+					for (day = dayInitialChange.Day; day <= dateWeekEnd.Day; day++)
+					{
+						DateTime dateCreate = new DateTime(dayInitialChange.Year, dayInitialChange.Month, day);
+						string dayName = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(dateCreate.DayOfWeek);
+
+						// if (dateCreate.Day == 1 && dateCreate.DayOfWeek != DayOfWeek.Sunday)
+
+						// {
+						// 	int dayOff = 7 - ((int)dateCreate.DayOfWeek);
+						// 	for (int i = 7; i > dayOff; i--)
+						// 	{
+						// 		countDays++;
+						// 		dateWeekInitial = dateWeekInitial.AddDays(-countDays);
+						// 		<div class="tagSemana card w-25">
+						// 			<span class="headcol">@DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(dateCreate.AddDays(-countDays).DayOfWeek), @dateCreate.AddDays(-countDays).Day</span>
+						// 		<div></div>
+						// 		<div></div>
+
+						// 		</div>
+
+						// 	}
+						// }
+
+						<div class="tagSemana card w-25">
+
+							<span class="headcol">@dayName, @dateCreate.Day </span>
+							@{
+								for (var hour = 1; hour <= 24; hour++)
+								{
+
+									<div class="">
+										<div class="headcol"></div>
+									</div>
+
+								}
+							}
+							</div>
+						
+					}
+				}
+		</div>
+
+
+		<br />
+
+
+	</main>
+</div>
+
+
+
+
